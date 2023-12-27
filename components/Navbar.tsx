@@ -10,7 +10,7 @@ import Authlinks from "./Authlinks";
 const Navbar = () => {
   return (
     <div className="flex items-center justify-between h-24">
-      <div className="flex flex-1 gap-2">
+      <div className="hidden lg:flex flex-1 gap-2">
         <Link href={siteConfig.links.github} target="_blank" rel="noreferrer">
           <div
             className={cn(
@@ -38,17 +38,23 @@ const Navbar = () => {
           </div>
         </Link>
       </div>
-      <div className="flex-1 text-center text-4xl font-bold">
-        <div className="bg-black inline-block rounded-md text-white py-0.5">
+      <div className="flex-1 text-left lg:text-center text-2xl md:text-3xl xl:text-4xl font-bold">
+        <div className="bg-black inline rounded-md text-white">
           <span className="px-1">Blog</span>
           <span className="bg-[#FF9900] text-black rounded-md px-2">Hub</span>
         </div>
       </div>
-      <div className="flex flex-1 gap-2 text-xl justify-between items-center">
+      <div className="flex flex-1 gap-4 xl:gap-5 text-lg xl:text-xl justify-end sm:justify-between items-center">
         <ModeToggle />
-        <Link href="/">Homepage</Link>
-        <Link href="/contact">Contact</Link>
-        <Link href="/about">About</Link>
+        <Link className="hidden sm:block" href="/">
+          Homepage
+        </Link>
+        <Link className="hidden sm:block" href="/about">
+          About
+        </Link>
+        <Link className="hidden sm:block" href="/contact">
+          Contact
+        </Link>
         <Authlinks />
       </div>
     </div>
