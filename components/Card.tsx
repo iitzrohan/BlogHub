@@ -20,7 +20,7 @@ const Card = () => {
         {/* Detail */}
         <div>
           {/* Date */}
-          <span className="text-gray-500">28.12.2023-</span>
+          <span className="text-gray-500">28.12.2023 - </span>
           {/* Category */}
           <span className="text-red-700 font-medium">CULTURE</span>
         </div>
