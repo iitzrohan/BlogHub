@@ -5,10 +5,12 @@ import Menu from "@/components/Menu";
 
 export default function Home() {
   return (
+    // Container
     <div>
       <Featured />
       <CategoryList />
-      <div>
+      {/* Content */}
+      <div className="flex gap-12">
         <CardList />
         <Menu />
       </div>

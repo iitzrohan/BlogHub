@@ -24,7 +24,7 @@ const Featured = () => {
             sunt.
           </h1>
           {/* Post Description */}
-          <p className="text-xl font-light">
+          <p className="text-xl font-light text-[#626262]">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde minus
             in tempore aspernatur, commodi laudantium. Vero officiis
             consequuntur libero doloribus! Nisi beatae aspernatur minus. Unde

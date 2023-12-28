@@ -73,7 +73,6 @@ const CategoryList = () => {
           coding
         </Link>
       </div>
-      CategoryList
     </div>
   );
 };
