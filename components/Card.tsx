@@ -7,7 +7,7 @@ const Card = () => {
     // Container
     <div className="mb-12 flex items-center gap-12">
       {/* Image Container */}
-      <div className="flex-1 h-[350px] relative">
+      <div className="flex-1 h-[350px] relative hidden xl:block">
         <Image
           src="/p1.jpeg"
           alt=""

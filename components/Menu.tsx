@@ -4,7 +4,8 @@ import MenuCategories from "./MenuCategories";
 
 const Menu = () => {
   return (
-    <div className="w-1/4 mt-14">
+    // Container
+    <div className="w-1/4 mt-14 hidden lg:block">
       {/* Subtitle */}
       <h2 className="text-gray-500 text-base font-normal">{"What's hot"}</h2>
       {/* Title */}

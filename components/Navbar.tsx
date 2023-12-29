@@ -38,12 +38,15 @@ const Navbar = () => {
           </div>
         </Link>
       </div>
-      <div className="flex-1 text-left lg:text-center text-2xl md:text-3xl xl:text-4xl font-bold">
+      <Link
+        href="/"
+        className="flex-1 text-left lg:text-center text-2xl md:text-3xl xl:text-4xl font-bold"
+      >
         <div className="bg-black inline rounded-md text-white">
           <span className="px-1">Blog</span>
           <span className="bg-[#FF9900] text-black rounded-md px-2">Hub</span>
         </div>
-      </div>
+      </Link>
       <div className="flex flex-1 gap-4 xl:gap-5 text-lg xl:text-xl justify-end sm:justify-between items-center">
         <ModeToggle />
         <Link className="hidden sm:block" href="/">

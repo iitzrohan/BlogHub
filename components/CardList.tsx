@@ -13,7 +13,7 @@ import {
 const CardList = () => {
   return (
     // Container
-    <div className="w-3/4">
+    <div className="w-full lg:w-3/4">
       {/* Title */}
       <h1 className="my-12 font-bold">Recent Posts</h1>
       {/* Posts */}
