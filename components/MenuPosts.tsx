@@ -22,12 +22,8 @@ const MenuPosts = ({ withImage }: MenuPostsProps) => {
 
         {/* Text Container */}
         <div className="flex flex-col gap-1">
-          {/* Post Category */}
-          <span className="py-1 px-2 rounded-lg text-xs text-white bg-[#ff7857] w-max">
-            Travel
-          </span>
           {/* Post Title */}
-          <h3 className="text-lg font-medium text-[#626262]">
+          <h3 className="text-lg font-medium text-softTextColor">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus,
             officiis!
           </h3>
@@ -51,12 +47,8 @@ const MenuPosts = ({ withImage }: MenuPostsProps) => {
 
         {/* Text Container */}
         <div className="flex flex-col gap-1">
-          {/* Post Category */}
-          <span className="py-1 px-2 rounded-lg text-xs text-white bg-[#ffb14f] w-max">
-            Culture
-          </span>
           {/* Post Title */}
-          <h3 className="text-lg font-medium text-[#626262]">
+          <h3 className="text-lg font-medium text-softTextColor">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus,
             officiis!
           </h3>
@@ -80,12 +72,8 @@ const MenuPosts = ({ withImage }: MenuPostsProps) => {
 
         {/* Text Container */}
         <div className="flex flex-col gap-1">
-          {/* Post Category */}
-          <span className="py-1 px-2 rounded-lg text-xs text-white bg-[#ff7887] w-max">
-            Fashion
-          </span>
           {/* Post Title */}
-          <h3 className="text-lg font-medium text-[#626262]">
+          <h3 className="text-lg font-medium text-softTextColor">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus,
             officiis!
           </h3>
@@ -109,12 +97,8 @@ const MenuPosts = ({ withImage }: MenuPostsProps) => {
 
         {/* Text Container */}
         <div className="flex flex-col gap-1">
-          {/* Post Category */}
-          <span className="py-1 px-2 rounded-lg text-xs text-white bg-[#775aec] w-max">
-            Coding
-          </span>
           {/* Post Title */}
-          <h3 className="text-lg font-medium text-[#626262]">
+          <h3 className="text-lg font-medium text-softTextColor">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus,
             officiis!
           </h3>

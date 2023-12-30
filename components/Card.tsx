@@ -20,9 +20,7 @@ const Card = () => {
         {/* Detail */}
         <div>
           {/* Date */}
-          <span className="text-gray-500">28.12.2023 - </span>
-          {/* Category */}
-          <span className="text-red-700 font-medium">CULTURE</span>
+          <span className="text-softTextColor">28.12.2023</span>
         </div>
         {/* Title */}
         <Link href="/">
@@ -32,7 +30,7 @@ const Card = () => {
           </h1>
         </Link>
         {/* Description */}
-        <p className="text-lg font-light text-[#626262]">
+        <p className="text-lg font-light text-softTextColor">
           Lorem ipsum dolor sit, amet consectetur adipisicing elit. Accusantium
           dolore deserunt sit, laboriosam iusto delectus! Eaque ratione
           consequatur illum ullam, necessitatibus mollitia, recusandae quaerat
@@ -40,7 +38,7 @@ const Card = () => {
         </p>
         <Link
           href="/"
-          className="text-lg font-light text-[#626262] border-b border-red-700 border-solid w-max py-0.5"
+          className="text-lg font-light text-softTextColor border-b border-red-700 border-solid w-max py-0.5"
         >
           Read More
         </Link>

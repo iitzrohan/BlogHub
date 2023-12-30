@@ -36,7 +36,7 @@ const Comments = () => {
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
             {/* UserTextContainer */}
-            <div className="flex flex-col gap-1 text-[#626262]">
+            <div className="flex flex-col gap-1 text-softTextColor">
               {/* Username */}
               <span className="text-xl font-medium">John Doe</span>
               {/* Date */}
@@ -44,79 +44,7 @@ const Comments = () => {
             </div>
           </div>
           {/* Description */}
-          <p className="text-lg font-light text-[#626262]">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
-            consequuntur animi voluptatem adipisci nemo accusantium! Lorem ipsum
-            dolor sit amet. Lorem ipsum dolor sit amet consectetur, adipisicing
-            elit. Itaque, quisquam.
-          </p>
-        </div>
-        <div className="mb-12">
-          {/* User */}
-          <div className="flex items-center gap-5 mb-5">
-            {/* UserImageContainer */}
-            <Avatar>
-              <AvatarImage src="https://github.com/shadcn.png" />
-              <AvatarFallback>CN</AvatarFallback>
-            </Avatar>
-            {/* UserTextContainer */}
-            <div className="flex flex-col gap-1 text-[#626262]">
-              {/* Username */}
-              <span className="text-xl font-medium">John Doe</span>
-              {/* Date */}
-              <span>29.12.2023</span>
-            </div>
-          </div>
-          {/* Description */}
-          <p className="text-lg font-light text-[#626262]">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
-            consequuntur animi voluptatem adipisci nemo accusantium! Lorem ipsum
-            dolor sit amet. Lorem ipsum dolor sit amet consectetur, adipisicing
-            elit. Itaque, quisquam.
-          </p>
-        </div>
-        <div className="mb-12">
-          {/* User */}
-          <div className="flex items-center gap-5 mb-5">
-            {/* UserImageContainer */}
-            <Avatar>
-              <AvatarImage src="https://github.com/shadcn.png" />
-              <AvatarFallback>CN</AvatarFallback>
-            </Avatar>
-            {/* UserTextContainer */}
-            <div className="flex flex-col gap-1 text-[#626262]">
-              {/* Username */}
-              <span className="text-xl font-medium">John Doe</span>
-              {/* Date */}
-              <span>29.12.2023</span>
-            </div>
-          </div>
-          {/* Description */}
-          <p className="text-lg font-light text-[#626262]">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
-            consequuntur animi voluptatem adipisci nemo accusantium! Lorem ipsum
-            dolor sit amet. Lorem ipsum dolor sit amet consectetur, adipisicing
-            elit. Itaque, quisquam.
-          </p>
-        </div>
-        <div className="mb-12">
-          {/* User */}
-          <div className="flex items-center gap-5 mb-5">
-            {/* UserImageContainer */}
-            <Avatar>
-              <AvatarImage src="https://github.com/shadcn.png" />
-              <AvatarFallback>CN</AvatarFallback>
-            </Avatar>
-            {/* UserTextContainer */}
-            <div className="flex flex-col gap-1 text-[#626262]">
-              {/* Username */}
-              <span className="text-xl font-medium">John Doe</span>
-              {/* Date */}
-              <span>29.12.2023</span>
-            </div>
-          </div>
-          {/* Description */}
-          <p className="text-lg font-light text-[#626262]">
+          <p className="text-lg font-light text-softTextColor">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
             consequuntur animi voluptatem adipisci nemo accusantium! Lorem ipsum
             dolor sit amet. Lorem ipsum dolor sit amet consectetur, adipisicing

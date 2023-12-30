@@ -8,7 +8,7 @@ const LoginPage = () => {
     // Container
     <div className="flex items-center justify-center mt-15">
       {/* Wrapper */}
-      <div className="bg-gray-400 py-40 px-16 sm:px-24 md:px-32 lg:px-40 flex flex-col gap-20 rounded-xl">
+      <div className="bg-softBg py-40 px-16 sm:px-24 md:px-32 lg:px-40 flex flex-col gap-20 rounded-xl">
         {/* SocialButton */}
         <Button
           variant="outline"

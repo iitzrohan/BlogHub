@@ -25,7 +25,7 @@ const SinglePage = () => {
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
             {/* UserTextContainer */}
-            <div className="flex flex-col gap-1 text-[#626262]">
+            <div className="flex flex-col gap-1 text-softTextColor">
               {/* Username */}
               <span className="text-xl font-medium">John Doe</span>
               {/* Date */}

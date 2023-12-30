@@ -1,6 +1,5 @@
 import React from "react";
 import MenuPosts from "./MenuPosts";
-import MenuCategories from "./MenuCategories";
 
 const Menu = () => {
   return (
@@ -11,11 +10,6 @@ const Menu = () => {
       {/* Title */}
       <h1 className="text-3xl">Most Popular</h1>
       <MenuPosts withImage={false} />
-      {/* Subtitle */}
-      <h2 className="text-gray-500 text-base font-normal">Discover by topic</h2>
-      {/* Title */}
-      <h1 className="text-3xl">Categories</h1>
-      <MenuCategories />
       {/* Subtitle */}
       <h2 className="text-gray-500 text-base font-normal">
         Chosen by the editor

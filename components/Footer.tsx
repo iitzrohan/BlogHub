@@ -9,7 +9,7 @@ import Link from "next/link";
 const Footer = () => {
   return (
     // Container
-    <div className="mt-12 py-5 px-0 flex items-center justify-between flex-col md:flex-row text-[#626262]">
+    <div className="mt-12 py-5 px-0 flex items-center justify-between flex-col md:flex-row text-softTextColor">
       {/* Info */}
       <div className="flex-1 flex flex-col gap-3">
         {/* Logo */}

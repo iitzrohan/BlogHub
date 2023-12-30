@@ -24,6 +24,8 @@
     --input: 214.3 31.8% 91.4%;
     --ring: 221.2 83.2% 53.3%;
     --radius: 0.5rem;
+    --softBg: #f0f0f0;
+    --softTextColor: #626262;
   }
 
   :root[class~="dark"] {
@@ -46,6 +48,8 @@
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 224.3 76.3% 48%;
+    --softBg: #f0f0f0;
+    --softTextColor: #626262;
   }
 }
 
@@ -56,4 +60,8 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.ql-container {
+  font-size: 28px !important;
 }
