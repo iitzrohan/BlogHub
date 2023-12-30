@@ -1,6 +1,6 @@
 import React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import { Icons } from "./Icons";
+import { Icons } from "./ui/Icons";
 import { siteConfig } from "@/config/Site";
 import { buttonVariants } from "./ui/button";
 import { cn } from "@/lib/utils";

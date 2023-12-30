@@ -3,10 +3,12 @@ import Link from "next/link";
 import React from "react";
 import { useState } from "react";
 
+type Status = "authenticated" | "notauthenticated";
+
 const Authlinks = () => {
   const [open, setOpen] = useState(false);
   // temporary
-  const status = "notauthenticated";
+  const status: Status = "notauthenticated";
 
   return (
     <>

@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import React from "react";
-import { Icons } from "./Icons";
+import { Icons } from "./ui/Icons";
 import { siteConfig } from "@/config/Site";
 import { buttonVariants } from "./ui/button";
 import { ModeToggle } from "./Mode-toggle";
