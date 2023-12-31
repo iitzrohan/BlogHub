@@ -1,9 +1,26 @@
+"use client";
+
 import { Icons } from "@/components/ui/Icons";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import React from "react";
+import { signIn, useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import React, { useEffect } from "react";
 
 const LoginPage = () => {
+  const { status } = useSession();
+
+  const router = useRouter();
+
+  useEffect(() => {
+    if (status === "authenticated") {
+      router.push("/");
+    }
+  }, [status, router]);
+
+  if (status === "loading") {
+    return <div>Loading...</div>;
+  }
   return (
     // Container
     <div className="flex items-center justify-center mt-15">
@@ -13,6 +30,7 @@ const LoginPage = () => {
         <Button
           variant="outline"
           className="p-5 font-bold cursor-pointer flex items-center justify-center"
+          onClick={() => signIn("google")}
         >
           <div
             className={cn(
@@ -29,6 +47,7 @@ const LoginPage = () => {
         <Button
           variant="outline"
           className="p-5 font-bold cursor-pointer flex items-center justify-center"
+          onClick={() => signIn("github")}
         >
           <div
             className={cn(

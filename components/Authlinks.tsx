@@ -1,18 +1,16 @@
 "use client";
+import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import React from "react";
 import { useState } from "react";
 
-type Status = "authenticated" | "notauthenticated";
-
 const Authlinks = () => {
   const [open, setOpen] = useState(false);
-  // temporary
-  const status: Status = "notauthenticated";
+  const { status } = useSession();
 
   return (
     <>
-      {status === "notauthenticated" ? (
+      {status === "unauthenticated" ? (
         <Link className="hidden sm:block" href="/login">
           Login
         </Link>
@@ -21,7 +19,9 @@ const Authlinks = () => {
           <Link className="hidden sm:block" href="/login">
             Write
           </Link>
-          <span className="cursor-pointer">Logout</span>
+          <span className="cursor-pointer" onClick={() => signOut()}>
+            Logout
+          </span>
         </>
       )}
       <div
@@ -37,12 +37,14 @@ const Authlinks = () => {
           <Link href="/">Homepage</Link>
           <Link href="/about">About</Link>
           <Link href="/contact">Contact</Link>
-          {status === "notauthenticated" ? (
+          {status === "unauthenticated" ? (
             <Link href="/login">Login</Link>
           ) : (
             <>
               <Link href="/login">Write</Link>
-              <span className="cursor-pointer">Logout</span>
+              <span className="cursor-pointer" onClick={() => signOut()}>
+                Logout
+              </span>
             </>
           )}
         </div>
