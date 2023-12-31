@@ -16,7 +16,7 @@ const Authlinks = () => {
         </Link>
       ) : (
         <>
-          <Link className="hidden sm:block" href="/login">
+          <Link className="hidden sm:block" href="/write">
             Write
           </Link>
           <span className="cursor-pointer" onClick={() => signOut()}>
@@ -41,7 +41,7 @@ const Authlinks = () => {
             <Link href="/login">Login</Link>
           ) : (
             <>
-              <Link href="/login">Write</Link>
+              <Link href="/write">Write</Link>
               <span className="cursor-pointer" onClick={() => signOut()}>
                 Logout
               </span>

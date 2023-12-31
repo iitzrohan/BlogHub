@@ -1,25 +1,69 @@
+"use client";
 import Link from "next/link";
-import React from "react";
+import { useState } from "react";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import useSWR from "swr";
+import { useSession } from "next-auth/react";
 
-const Comments = () => {
-  const status = "authenticated";
+type Item = {
+  _id: string;
+  createdAt: string;
+  slug: String;
+  title: string;
+  desc: string;
+  img: string;
+  userEmail: String;
+  user: {
+    _id: string;
+    name: string;
+    email: string;
+    image: string;
+  };
+};
+
+const fetcher = async (url: string) => {
+  const res = await fetch(url);
+
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.message);
+  return data;
+};
+
+const Comments = ({ postSlug }: { postSlug: string }) => {
+  const { status } = useSession();
+
+  const { data, mutate, isLoading } = useSWR(
+    `http://localhost:3000/api/comments?postSlug=${postSlug}`,
+    fetcher
+  );
+
+  const [desc, setDesc] = useState("");
+
+  const handleSubmit = async () => {
+    await fetch("/api/comments", {
+      method: "POST",
+      body: JSON.stringify({ desc, postSlug }),
+    });
+    setDesc("");
+    mutate();
+  };
   return (
     // Container
     <div className="mt-12">
       {/* Title */}
-      <h1 className="text-[#626262] mb-8">Comments</h1>
+      <h1 className="text-softTextColor mb-8">Comments</h1>
       {status === "authenticated" ? (
         // Write
         <div className="flex items-center justify-between gap-8">
           {/* Input */}
-          <Input placeholder="Write your comment" />
+          <Input
+            placeholder="Write your comment"
+            onChange={(e) => setDesc(e.target.value)}
+          />
           {/* Button */}
-          <Button type="submit" className="">
-            Send
-          </Button>
+          <Button onClick={handleSubmit}>Send</Button>
         </div>
       ) : (
         <Link href="/">Sign in to comment</Link>
@@ -27,30 +71,35 @@ const Comments = () => {
       {/* Comments */}
       <div className="mt-12">
         {/* Comment */}
-        <div className="mb-12">
-          {/* User */}
-          <div className="flex items-center gap-5 mb-5">
-            {/* UserImageContainer */}
-            <Avatar>
-              <AvatarImage src="https://github.com/shadcn.png" />
-              <AvatarFallback>CN</AvatarFallback>
-            </Avatar>
-            {/* UserTextContainer */}
-            <div className="flex flex-col gap-1 text-softTextColor">
-              {/* Username */}
-              <span className="text-xl font-medium">John Doe</span>
-              {/* Date */}
-              <span>29.12.2023</span>
-            </div>
-          </div>
-          {/* Description */}
-          <p className="text-lg font-light text-softTextColor">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
-            consequuntur animi voluptatem adipisci nemo accusantium! Lorem ipsum
-            dolor sit amet. Lorem ipsum dolor sit amet consectetur, adipisicing
-            elit. Itaque, quisquam.
-          </p>
-        </div>
+        {isLoading
+          ? "loading"
+          : data?.map((item: Item) => (
+              <div className="mb-12" key={item._id}>
+                {/* User */}
+                <div className="flex items-center gap-5 mb-5">
+                  {/* UserImageContainer */}
+                  {item?.user?.image && (
+                    <Avatar>
+                      <AvatarImage src={item.user.image} />
+                      <AvatarFallback>CN</AvatarFallback>
+                    </Avatar>
+                  )}
+                  {/* UserTextContainer */}
+                  <div className="flex flex-col gap-1 text-softTextColor">
+                    {/* Username */}
+                    <span className="text-xl font-medium">
+                      {item.user.name}
+                    </span>
+                    {/* Date */}
+                    <span>{item.createdAt}</span>
+                  </div>
+                </div>
+                {/* Description */}
+                <p className="text-lg font-light text-softTextColor">
+                  {item.desc}
+                </p>
+              </div>
+            ))}
       </div>
     </div>
   );
