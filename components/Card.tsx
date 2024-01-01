@@ -1,15 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { Key } from "react";
 
 type Item = {
   _id: string;
   createdAt: string;
-  slug: String;
+  slug: string;
   title: string;
   desc: string;
   img: string;
-  userEmail: String;
+  userEmail: string;
   user: {
     _id: string;
     name: string;
@@ -18,7 +18,29 @@ type Item = {
   };
 };
 
-const Card = ({ key, item }: { key: string; item: Item }) => {
+const Card = ({ key, item }: { key: Key; item: Item }) => {
+  const removeHTMLTags = (str: string) => {
+    if (str === null || str === "") {
+      return "";
+    } else {
+      // Remove HTML tags using regex
+      return str.replace(/<[^>]*>/g, "");
+    }
+  };
+
+  const getPreviewText = (str: string, maxLength: number) => {
+    const textWithoutTags = str.replace(/<\s*\/?p\s*[^>]*>/g, " ");
+    const textWithoutHTML = textWithoutTags.replace(/<[^>]+>/g, "");
+    const words = textWithoutHTML.split(/\s+/);
+    const truncatedWords = words.slice(0, maxLength);
+    let truncatedText = truncatedWords.join(" ");
+    truncatedText = truncatedText.replace(/[.,;:!?]*$/, "");
+    if (words.length > maxLength) {
+      truncatedText += "...";
+    }
+    return truncatedText;
+  };
+
   return (
     // Container
     <div className="mb-12 flex items-center gap-12" key={key}>
@@ -48,7 +70,7 @@ const Card = ({ key, item }: { key: string; item: Item }) => {
         </Link>
         {/* Description */}
         <p className="text-lg font-light text-softTextColor">
-          {item.desc.slice(0, 60)}
+          {getPreviewText(item.desc, 40)}
         </p>
         <Link
           href={`/posts/${item.slug}`}

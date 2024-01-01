@@ -5,7 +5,8 @@ import Image from "next/image";
 import React from "react";
 
 const getData = async (slug: string) => {
-  const res = await fetch(`http://localhost:3000/api/posts/${slug}`, {
+  const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/posts/${slug}`;
+  const res = await fetch(apiUrl, {
     cache: "no-store",
   });
   if (!res.ok) throw new Error("Failed");
@@ -38,7 +39,7 @@ const SinglePage = async ({ params }: { params: { slug: string } }) => {
               </Avatar>
             )}
             {/* UserTextContainer */}
-            <div className="flex flex-col gap-1 text-[#626262]">
+            <div className="flex flex-col gap-1 text-softTextColor">
               {/* Username */}
               <span className="text-xl font-medium">{item?.user.name}</span>
               {/* Date */}

@@ -34,14 +34,24 @@ const Authlinks = () => {
       </div>
       {open && (
         <div className="absolute top-24 left-0 bg-white dark:bg-black h-[calc(100vh_-_100px)] w-full flex flex-col items-center justify-center gap-12 text-4xl">
-          <Link href="/">Homepage</Link>
-          <Link href="/about">About</Link>
-          <Link href="/contact">Contact</Link>
+          <Link href="/" onClick={() => setOpen(!open)}>
+            Homepage
+          </Link>
+          <Link href="/about" onClick={() => setOpen(!open)}>
+            About
+          </Link>
+          <Link href="/contact" onClick={() => setOpen(!open)}>
+            Contact
+          </Link>
           {status === "unauthenticated" ? (
-            <Link href="/login">Login</Link>
+            <Link href="/login" onClick={() => setOpen(!open)}>
+              Login
+            </Link>
           ) : (
             <>
-              <Link href="/write">Write</Link>
+              <Link href="/write" onClick={() => setOpen(!open)}>
+                Write
+              </Link>
               <span className="cursor-pointer" onClick={() => signOut()}>
                 Logout
               </span>

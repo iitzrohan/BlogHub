@@ -12,11 +12,11 @@ import {
 type Item = {
   _id: string;
   createdAt: string;
-  slug: String;
+  slug: string;
   title: string;
   desc: string;
   img: string;
-  userEmail: String;
+  userEmail: string;
   user: {
     _id: string;
     name: string;
@@ -26,9 +26,12 @@ type Item = {
 };
 
 const getData = async (page: number) => {
-  const res = await fetch(`http://localhost:3000/api/posts?page=${page}`, {
-    cache: "no-store",
-  });
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/posts?page=${page}`,
+    {
+      cache: "no-store",
+    }
+  );
   if (!res.ok) throw new Error("Failed");
   return res.json();
 };

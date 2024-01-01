@@ -30,10 +30,9 @@ const Footer = () => {
         </div>
         {/* Description */}
         <p className="font-light">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
-          consequuntur animi voluptatem adipisci nemo accusantium! Lorem ipsum
-          dolor sit amet. Lorem ipsum dolor sit amet consectetur, adipisicing
-          elit. Itaque, quisquam.
+          {
+            "BlogHub is your gateway to a world of technology exploration. It's a platform sharing experiences, insights, and tips, inviting others to join in the quest for efficient coding and tech exploration."
+          }
         </p>
         {/* Icons */}
         <div className="mb-2 flex gap-2">
@@ -76,24 +75,15 @@ const Footer = () => {
           {/* Listtitle */}
           <span className="font-bold">Links</span>
           <Link href="/">Homepage</Link>
-          <Link href="/">Blog</Link>
           <Link href="/about">About</Link>
           <Link href="/contact">Contact</Link>
         </div>
         <div className="flex flex-col gap-2 font-light">
           {/* Listtitle */}
-          <span className="font-bold">Tags</span>
-          <Link href="/">Style</Link>
-          <Link href="/">Fashion</Link>
-          <Link href="/about">Coding</Link>
-          <Link href="/contact">Travel</Link>
-        </div>
-        <div className="flex flex-col gap-2 font-light">
-          {/* Listtitle */}
           <span className="font-bold">Social</span>
-          <Link href="/">Github</Link>
-          <Link href="/">Twitter</Link>
-          <Link href="/about">Linkedin</Link>
+          <Link href={siteConfig.links.github}>Github</Link>
+          <Link href={siteConfig.links.twitter}>Twitter</Link>
+          <Link href={siteConfig.links.linkedin}>Linkedin</Link>
         </div>
       </div>
     </div>
