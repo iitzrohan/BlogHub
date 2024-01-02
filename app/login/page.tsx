@@ -1,15 +1,12 @@
 "use client";
-
-import { Icons } from "@/components/ui/Icons";
-import { Button, buttonVariants } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { Icons } from "@/components/Icons";
+import { Button } from "@nextui-org/react";
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 
 const LoginPage = () => {
   const { status } = useSession();
-
   const router = useRouter();
 
   useEffect(() => {
@@ -21,46 +18,31 @@ const LoginPage = () => {
   if (status === "loading") {
     return <div>Loading...</div>;
   }
+
   return (
-    // Container
-    <div className="flex items-center justify-center mt-15">
-      {/* Wrapper */}
-      <div className="bg-softBg py-40 px-16 sm:px-24 md:px-32 lg:px-40 flex flex-col gap-20 rounded-xl">
-        {/* SocialButton */}
-        <Button
-          variant="outline"
-          className="p-5 font-bold cursor-pointer flex items-center justify-center"
-          onClick={() => signIn("google")}
-        >
-          <div
-            className={cn(
-              buttonVariants({
-                variant: "ghost",
-              }),
-              "w-9 px-0"
-            )}
+    <div className="flex items-center justify-center h-screen">
+      <div className="p-8 max-w-md w-full bg-white shadow-lg rounded-xl">
+        <h1 className="text-3xl font-bold mb-8 text-center">Sign In</h1>
+        <div className="flex flex-col gap-4">
+          <Button
+            variant="ghost"
+            color="secondary"
+            className="flex items-center justify-center gap-2"
+            onClick={() => signIn("google")}
           >
             <Icons.google className="h-4 w-4" />
-          </div>
-          Sign in with Google
-        </Button>
-        <Button
-          variant="outline"
-          className="p-5 font-bold cursor-pointer flex items-center justify-center"
-          onClick={() => signIn("github")}
-        >
-          <div
-            className={cn(
-              buttonVariants({
-                variant: "ghost",
-              }),
-              "w-9 px-0"
-            )}
+            Sign in with Google
+          </Button>
+          <Button
+            variant="ghost"
+            color="secondary"
+            className="flex items-center justify-center gap-2"
+            onClick={() => signIn("github")}
           >
             <Icons.gitHub className="h-4 w-4" />
-          </div>
-          Sign in with Github
-        </Button>
+            Sign in with GitHub
+          </Button>
+        </div>
       </div>
     </div>
   );

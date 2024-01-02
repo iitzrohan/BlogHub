@@ -1,6 +1,12 @@
-import React, { Key, useState } from "react";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import React, { Key } from "react";
 import Link from "next/link";
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  CardFooter,
+  Avatar,
+} from "@nextui-org/react";
 
 type Item = {
   _id: string;
@@ -17,47 +23,92 @@ type Item = {
     image: string;
   };
 };
-const MenuPosts = ({
-  key,
-  item,
-  withImage,
-}: {
-  key: Key;
-  item: Item;
-  withImage: boolean;
-}) => {
+
+type Comment = {
+  _id: string;
+  createdAt: string;
+  desc: string;
+  userEmail: string;
+  user: {
+    _id: string;
+    name: string;
+    email: string;
+    image: string;
+  };
+  post: {
+    _id: string;
+    createdAt: string;
+    slug: string;
+    title: string;
+    desc: string;
+    img: string;
+    views: number;
+    userEmail: string;
+  };
+};
+
+const MenuPosts = ({ item, comment }: { item?: Item; comment?: Comment }) => {
   return (
     // Items
-    <div className="flex flex-col gap-8 mt-8 mb-14" key={key}>
-      {/* Item */}
-      <Link href={`/posts/${item.slug}`} className="flex items-center gap-5">
-        {/* Image Container */}
-        {withImage && (
-          <Avatar>
-            <AvatarImage src={item.user.image} />
-            <AvatarFallback>CN</AvatarFallback>
-          </Avatar>
-        )}
+    <Card key={item ? item._id : comment?._id} className="my-6">
+      {/* Header */}
+      {/* Image Container */}
+      {comment && (
+        <CardHeader className="justify-between">
+          <div className="flex gap-5">
+            <Avatar
+              isBordered
+              radius="full"
+              size="md"
+              src={comment.user.image}
+            />
 
-        {/* Text Container */}
-        <div className="flex flex-col gap-1">
-          {/* Post Title */}
-          <h3 className="text-lg font-medium text-softTextColor">
-            {item.title}
-          </h3>
-          {/* Detail */}
-          <div className="text-xs">
-            {/* Username */}
-            <span>{item.user.name}</span>
-            {/* Date */}
-            <span className="text-gray-500">
-              {" "}
-              - {item.createdAt.slice(0, 10)}
-            </span>
+            <div className="flex flex-col gap-1 items-start justify-center">
+              <h4 className="text-small font-semibold leading-none text-default-600">
+                {comment.user.name}
+              </h4>
+              <h5 className="text-small tracking-tight text-default-400">
+                {comment.createdAt.slice(0, 10)}
+              </h5>
+            </div>
           </div>
-        </div>
-      </Link>
-    </div>
+        </CardHeader>
+      )}
+
+      {/* Text Container */}
+      {item && (
+        <CardBody className="text-base text-default-400">
+          <Link href={`/posts/${item.slug}`}>
+            <p className="text-blue-500 hover:text-blue-600 hover:underline cursor-pointer">
+              {item.title}
+            </p>
+          </Link>
+        </CardBody>
+      )}
+      {comment && (
+        <CardBody className="text-base text-default-400">
+          <p className="truncate">{comment.desc.slice(0, 30)}...</p>
+          <Link href={`/posts/${comment.post.slug}`}>
+            <p className="text-blue-500 hover:text-blue-600 hover:underline cursor-pointer mt-6">
+              {comment.post.title}
+            </p>
+          </Link>
+        </CardBody>
+      )}
+      {/* Footer */}
+      {item && (
+        <CardFooter>
+          <div className="flex flex-col gap-1 items-start justify-center">
+            <h4 className="text-small font-semibold leading-none text-default-600">
+              {item.user.name}
+            </h4>
+            <h5 className="text-small tracking-tight text-default-400">
+              {item.createdAt.slice(0, 10)}
+            </h5>
+          </div>
+        </CardFooter>
+      )}
+    </Card>
   );
 };
 

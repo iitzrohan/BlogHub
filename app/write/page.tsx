@@ -1,9 +1,8 @@
 "use client";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { FileImage, ImageIcon, Plus, Video } from "lucide-react";
+import { FileImage, Plus } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { Input, Button } from "@nextui-org/react";
 import {
   getStorage,
   ref,
@@ -26,6 +25,7 @@ const WritePage = () => {
   const [media, setMedia] = useState("");
   const [value, setValue] = useState("");
   const [title, setTitle] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const storage = getStorage(app);
@@ -108,61 +108,58 @@ const WritePage = () => {
   };
 
   return (
-    // Container
-    <div className="flex flex-col relative">
-      {/* Input */}
-      <Input
-        type="text"
-        placeholder="Title"
-        className="py-12 text-6xl border-none focus-visible:ring-offset-0 focus-visible:ring-0"
-        onChange={(e) => setTitle(e.target.value)}
-      />
-      {/* Editor */}
-      <div className="flex gap-5 relative flex-col">
-        <Button
-          variant="outline"
-          size="icon"
-          className="flex justify-center items-center"
-          onClick={() => setOpen(!open)}
-        >
-          <Plus className="h-4 w-4" />
-        </Button>
-        {open && (
-          // Add
-          <div className="flex absolute gap-5 left-16 z-50 w-full">
-            <Input
-              type="file"
-              id="image"
-              onChange={(e) => {
-                const selectedFile = e.target.files && e.target.files[0];
-                if (selectedFile) {
-                  setFile(selectedFile);
-                }
-              }}
-              className="hidden"
-            />
-            <Button variant="outline" size="icon">
-              <label htmlFor="image">
-                <FileImage />
-              </label>
-            </Button>
-          </div>
-        )}
+    <div className="flex flex-col relative ">
+      <form onSubmit={(e) => e.preventDefault()}>
+        <Input
+          placeholder="Title"
+          className="py-6"
+          onChange={(e) => setTitle(e.target.value)}
+        />
+        <div className="flex gap-5 relative flex-col">
+          <Button
+            isIconOnly
+            className="flex justify-center items-center"
+            onClick={() => setOpen(!open)}
+          >
+            <Plus className="h-4 w-4" />
+          </Button>
+          {open && (
+            <div className="flex absolute gap-5 left-16 z-50 w-full">
+              <Input
+                type="file"
+                id="image"
+                onChange={(e) => {
+                  const selectedFile = e.target.files && e.target.files[0];
+                  if (selectedFile) {
+                    setFile(selectedFile);
+                  }
+                }}
+                className="hidden"
+              />
+              <Button isIconOnly>
+                <label htmlFor="image">
+                  <FileImage />
+                </label>
+              </Button>
+            </div>
+          )}
+        </div>
         <ReactQuill
           theme="bubble"
           value={value}
           onChange={setValue}
           placeholder="Tell Your Story..."
-          className="w-full h-[calc(100vh_-_275px)]"
+          style={{ minHeight: "50vh" }}
         />
-      </div>
-      <Button
-        variant="default"
-        className="absolute bottom-0 right-0"
-        onClick={handleSubmit}
-      >
-        Publish
-      </Button>
+        <Button
+          color="primary"
+          className="absolute bottom-0 right-0"
+          onClick={handleSubmit}
+          disabled={isLoading}
+        >
+          {isLoading ? "Publishing..." : "Publish"}
+        </Button>
+      </form>
     </div>
   );
 };

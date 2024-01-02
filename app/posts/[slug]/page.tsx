@@ -1,6 +1,6 @@
 import Comments from "@/components/Comments";
 import Menu from "@/components/Menu";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar } from "@nextui-org/react";
 import Image from "next/image";
 import React from "react";
 
@@ -33,10 +33,9 @@ const SinglePage = async ({ params }: { params: { slug: string } }) => {
           <div className="flex items-center gap-5">
             {/* UserImageContainer */}
             {item?.user?.image && (
-              <Avatar>
-                <AvatarImage src={item.user.image} />
-                <AvatarFallback>CN</AvatarFallback>
-              </Avatar>
+              <div className="flex gap-4 items-center">
+                <Avatar src={item.user.image} size="md" />
+              </div>
             )}
             {/* UserTextContainer */}
             <div className="flex flex-col gap-1 text-softTextColor">

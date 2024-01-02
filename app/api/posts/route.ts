@@ -5,12 +5,10 @@ import { getAuthSession } from "@/utils/auth";
 export const GET = async (req: Request) => {
   const POST_PER_PAGE = 4;
   const POST_PER_PAGE_POPULAR = 6;
-  const POST_PER_PAGE_RECOMMENDED = 6;
   const { searchParams } = new URL(req.url ?? "");
   const pageString = searchParams.get("page");
   const page = pageString ? parseInt(pageString) || 1 : 1;
   const isPopular = searchParams.get("popular") === "true"; // Check for 'popular' query parameter
-  const isRecommended = searchParams.get("recommended") === "true"; // Check for 'recommended' query parameter
 
   const query = {
     take: POST_PER_PAGE,
@@ -31,60 +29,6 @@ export const GET = async (req: Request) => {
           include: { user: true },
         }),
       ]);
-    } else if (isRecommended) {
-      // Logic for fetching recommended posts based on comments within the last month
-      const currentDate = new Date();
-      const oneMonthAgo = new Date();
-      oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1);
-
-      const recommendedPosts = await prisma.post.findMany({
-        ...query,
-        where: {
-          createdAt: {
-            gte: oneMonthAgo.toISOString(),
-            lte: currentDate.toISOString(),
-          },
-          comments: {
-            some: {
-              createdAt: {
-                gte: oneMonthAgo.toISOString(),
-                lte: currentDate.toISOString(),
-              },
-            },
-          },
-        },
-        include: {
-          user: true,
-        },
-      });
-
-      const remainingCount =
-        POST_PER_PAGE_RECOMMENDED - recommendedPosts.length;
-
-      // Fetch additional posts without comments within the last month but within the month
-      const additionalPosts = await prisma.post.findMany({
-        ...query,
-        where: {
-          createdAt: {
-            gte: oneMonthAgo.toISOString(),
-            lte: currentDate.toISOString(),
-          },
-          NOT: {
-            id: {
-              in: recommendedPosts.map((post) => post.id),
-            },
-          },
-        },
-        include: {
-          user: true,
-        },
-        orderBy: {
-          createdAt: "asc", // Order by oldest created within the month
-        },
-        take: remainingCount,
-      });
-
-      posts = [...recommendedPosts, ...additionalPosts];
     } else {
       // Logic for fetching regular posts
       [posts, count] = await prisma.$transaction([

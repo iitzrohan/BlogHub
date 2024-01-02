@@ -1,20 +1,11 @@
 import Image from "next/image";
 import React from "react";
-import { Button } from "./ui/button";
+import { Button } from "@nextui-org/react";
 import prisma from "@/utils/connect";
 import Link from "next/link";
 
 const Featured = async () => {
   const firstPost = await prisma.post.findFirst({});
-
-  const removeHTMLTags = (str: string) => {
-    if (str === null || str === "") {
-      return "";
-    } else {
-      // Remove HTML tags using regex
-      return str.replace(/<[^>]*>/g, "");
-    }
-  };
 
   const getPreviewText = (str: string, maxLength: number) => {
     const textWithoutTags = str.replace(/<\s*\/?p\s*[^>]*>/g, " ");
@@ -52,17 +43,15 @@ const Featured = async () => {
               <h1 className="text-4xl">{firstPost?.title}</h1>
             </Link>
             {/* Post Description */}
-            <p className="text-xl font-light text-softTextColor">
+            <p className="text-xl font-light">
               {getPreviewText(firstPost.desc, 60)}
             </p>
-            {firstPost && (
-              <Link
-                href={`/posts/${firstPost.slug}`}
-                className="flex justify-end"
-              >
-                <Button className="w-max">Read more</Button>
-              </Link>
-            )}
+            <Link
+              href={`/posts/${firstPost.slug}`}
+              className="w-max border-blue-500 border-2 rounded-md px-4 py-2 text-blue-500 hover:bg-blue-500 hover:text-white transition-all duration-300 ease-in-out cursor-pointer text-xl font-light"
+            >
+              Read more
+            </Link>
           </div>
         </div>
       )}

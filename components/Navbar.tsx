@@ -1,66 +1,61 @@
-import { cn } from "@/lib/utils";
 import Link from "next/link";
 import React from "react";
-import { Icons } from "./ui/Icons";
+import { Icons } from "./Icons";
 import { siteConfig } from "@/config/Site";
-import { buttonVariants } from "./ui/button";
-import { ModeToggle } from "./Mode-toggle";
+import { ThemeSwitcher } from "./Mode-toggle";
 import Authlinks from "./Authlinks";
+import { NavbarBrand } from "@nextui-org/react";
+import {
+  Navbar as NextUINavbar,
+  NavbarContent,
+  NavbarItem,
+} from "@nextui-org/react";
 
 const Navbar = () => {
   return (
-    <div className="flex items-center justify-between h-24">
-      <div className="hidden lg:flex flex-1 gap-2">
-        <Link href={siteConfig.links.github} target="_blank" rel="noreferrer">
-          <div
-            className={cn(
-              buttonVariants({
-                variant: "ghost",
-              }),
-              "w-9 px-0"
-            )}
+    <NextUINavbar
+      className="[&_header]:max-w-none"
+      shouldHideOnScroll
+      isBordered
+    >
+      <NavbarContent className="hidden lg:flex">
+        <NavbarItem className="mr-2">
+          <Link href={siteConfig.links.github} target="_blank" rel="noreferrer">
+            <Icons.gitHub className="h-5 w-5" />
+          </Link>
+        </NavbarItem>
+        <NavbarItem className="ml-2">
+          <Link
+            href={siteConfig.links.twitter}
+            target="_blank"
+            rel="noreferrer"
           >
-            <Icons.gitHub className="h-4 w-4" />
-            <span className="sr-only">GitHub</span>
+            <Icons.twitter className="h-5 w-5 fill-current" />
+          </Link>
+        </NavbarItem>
+      </NavbarContent>
+      <NavbarBrand className="justify-start lg:justify-center">
+        <Link href="/" className="text-2xl md:text-3xl xl:text-4xl font-bold">
+          <div className="bg-black inline rounded-md text-white">
+            <span className="px-1">Blog</span>
+            <span className="bg-[#FF9900] text-black rounded-md px-2">Hub</span>
           </div>
         </Link>
-        <Link href={siteConfig.links.twitter} target="_blank" rel="noreferrer">
-          <div
-            className={cn(
-              buttonVariants({
-                variant: "ghost",
-              }),
-              "w-9 px-0"
-            )}
-          >
-            <Icons.twitter className="h-3 w-3 fill-current" />
-            <span className="sr-only">Twitter</span>
-          </div>
-        </Link>
-      </div>
-      <Link
-        href="/"
-        className="flex-1 text-left lg:text-center text-2xl md:text-3xl xl:text-4xl font-bold"
-      >
-        <div className="bg-black inline rounded-md text-white">
-          <span className="px-1">Blog</span>
-          <span className="bg-[#FF9900] text-black rounded-md px-2">Hub</span>
-        </div>
-      </Link>
-      <div className="flex flex-1 gap-4 xl:gap-5 text-lg xl:text-xl justify-end sm:justify-between items-center">
-        <ModeToggle />
-        <Link className="hidden sm:block" href="/">
-          Homepage
-        </Link>
-        <Link className="hidden sm:block" href="/about">
-          About
-        </Link>
-        <Link className="hidden sm:block" href="/contact">
-          Contact
-        </Link>
+      </NavbarBrand>
+      <NavbarContent data-justify="end">
+        <ThemeSwitcher />
+        <NavbarItem className="hidden sm:flex">
+          <Link href="/">Homepage</Link>
+        </NavbarItem>
+        <NavbarItem className="hidden sm:flex">
+          <Link href="/about">About</Link>
+        </NavbarItem>
+        <NavbarItem className="hidden sm:flex">
+          <Link href="/contact">Contact</Link>
+        </NavbarItem>
         <Authlinks />
-      </div>
-    </div>
+      </NavbarContent>
+    </NextUINavbar>
   );
 };
 

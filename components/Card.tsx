@@ -18,16 +18,7 @@ type Item = {
   };
 };
 
-const Card = ({ key, item }: { key: Key; item: Item }) => {
-  const removeHTMLTags = (str: string) => {
-    if (str === null || str === "") {
-      return "";
-    } else {
-      // Remove HTML tags using regex
-      return str.replace(/<[^>]*>/g, "");
-    }
-  };
-
+const Card = ({ item }: { item: Item }) => {
   const getPreviewText = (str: string, maxLength: number) => {
     const textWithoutTags = str.replace(/<\s*\/?p\s*[^>]*>/g, " ");
     const textWithoutHTML = textWithoutTags.replace(/<[^>]+>/g, "");
@@ -43,10 +34,13 @@ const Card = ({ key, item }: { key: Key; item: Item }) => {
 
   return (
     // Container
-    <div className="mb-12 flex items-center gap-12" key={key}>
+    <div className="mb-12 flex items-center gap-12" key={item._id}>
       {/* Image Container */}
       {item?.img && (
-        <div className="flex-1 h-[350px] relative hidden xl:block">
+        <div
+          className="w-1/3
+         h-80 relative hidden xl:block"
+        >
           <Image
             src={item.img}
             alt=""
@@ -56,7 +50,7 @@ const Card = ({ key, item }: { key: Key; item: Item }) => {
         </div>
       )}
       {/* Text Container */}
-      <div className="flex-1 flex flex-col gap-8">
+      <div className="w-full xl:w-2/3 flex flex-col gap-8">
         {/* Detail */}
         <div>
           {/* Date */}
@@ -69,12 +63,10 @@ const Card = ({ key, item }: { key: Key; item: Item }) => {
           <h1 className="text-2xl font-bold">{item.title}</h1>
         </Link>
         {/* Description */}
-        <p className="text-lg font-light text-softTextColor">
-          {getPreviewText(item.desc, 40)}
-        </p>
+        <p className="text-lg font-light">{getPreviewText(item.desc, 40)}</p>
         <Link
           href={`/posts/${item.slug}`}
-          className="text-lg font-light text-softTextColor border-b border-red-700 border-solid w-max py-0.5"
+          className="text-lg font-light border-b border-red-700 border-solid w-max py-0.5"
         >
           Read More
         </Link>

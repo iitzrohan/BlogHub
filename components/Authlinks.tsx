@@ -3,6 +3,13 @@ import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import React from "react";
 import { useState } from "react";
+import {
+  NavbarMenuToggle,
+  NavbarMenu,
+  NavbarMenuItem,
+  NavbarContent,
+  NavbarItem,
+} from "@nextui-org/react";
 
 const Authlinks = () => {
   const [open, setOpen] = useState(false);
@@ -11,53 +18,83 @@ const Authlinks = () => {
   return (
     <>
       {status === "unauthenticated" ? (
-        <Link className="hidden sm:block" href="/login">
-          Login
-        </Link>
+        <NavbarItem>
+          <Link className="hidden sm:block" href="/login">
+            Login
+          </Link>
+        </NavbarItem>
       ) : (
         <>
-          <Link className="hidden sm:block" href="/write">
-            Write
-          </Link>
-          <span className="cursor-pointer" onClick={() => signOut()}>
-            Logout
-          </span>
+          <NavbarItem>
+            <Link className="hidden sm:block" href="/write">
+              Write
+            </Link>
+          </NavbarItem>
+          <NavbarItem>
+            <Link
+              className="hidden sm:block"
+              href="/"
+              onClick={() => signOut()}
+            >
+              Logout
+            </Link>
+          </NavbarItem>
         </>
       )}
-      <div
-        className="w-5 h-4 flex sm:hidden flex-col justify-between cursor-pointer"
-        onClick={() => setOpen(!open)}
-      >
-        <div className="w-full h-0.5 bg-black dark:bg-white"></div>
-        <div className="w-full h-0.5 bg-black dark:bg-white"></div>
-        <div className="w-full h-0.5 bg-black dark:bg-white"></div>
-      </div>
+      <NavbarItem>
+        <NavbarMenuToggle
+          aria-label={open ? "Close menu" : "Open menu"}
+          className="sm:hidden"
+          onClick={() => setOpen(!open)}
+        />
+      </NavbarItem>
+
       {open && (
-        <div className="absolute top-24 left-0 bg-white dark:bg-black h-[calc(100vh_-_100px)] w-full flex flex-col items-center justify-center gap-12 text-4xl">
-          <Link href="/" onClick={() => setOpen(!open)}>
-            Homepage
-          </Link>
-          <Link href="/about" onClick={() => setOpen(!open)}>
-            About
-          </Link>
-          <Link href="/contact" onClick={() => setOpen(!open)}>
-            Contact
-          </Link>
-          {status === "unauthenticated" ? (
-            <Link href="/login" onClick={() => setOpen(!open)}>
-              Login
+        <NavbarMenu className="items-center justify-center gap-12">
+          <NavbarMenuItem>
+            <Link className="w-full" href="/" onClick={() => setOpen(!open)}>
+              Homepage
             </Link>
+          </NavbarMenuItem>
+          <NavbarMenuItem>
+            <Link
+              className="w-full"
+              href="/about"
+              onClick={() => setOpen(!open)}
+            >
+              About
+            </Link>
+          </NavbarMenuItem>
+          <NavbarMenuItem>
+            <Link
+              className="w-full"
+              href="/contact"
+              onClick={() => setOpen(!open)}
+            >
+              Contact
+            </Link>
+          </NavbarMenuItem>
+          {status === "unauthenticated" ? (
+            <NavbarMenuItem>
+              <Link href="/login" onClick={() => setOpen(!open)}>
+                Login
+              </Link>
+            </NavbarMenuItem>
           ) : (
             <>
-              <Link href="/write" onClick={() => setOpen(!open)}>
-                Write
-              </Link>
-              <span className="cursor-pointer" onClick={() => signOut()}>
-                Logout
-              </span>
+              <NavbarMenuItem>
+                <Link href="/write" onClick={() => setOpen(!open)}>
+                  Write
+                </Link>
+              </NavbarMenuItem>
+              <NavbarMenuItem>
+                <Link href="/" onClick={() => signOut()}>
+                  Logout
+                </Link>
+              </NavbarMenuItem>
             </>
           )}
-        </div>
+        </NavbarMenu>
       )}
     </>
   );

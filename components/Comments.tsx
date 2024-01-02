@@ -1,9 +1,9 @@
 "use client";
 import Link from "next/link";
 import { useState } from "react";
-import { Input } from "./ui/input";
-import { Button } from "./ui/button";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { Input } from "@nextui-org/react";
+import { Button } from "@nextui-org/react";
+import { Avatar } from "@nextui-org/react";
 import useSWR from "swr";
 import { useSession } from "next-auth/react";
 
@@ -59,11 +59,15 @@ const Comments = ({ postSlug }: { postSlug: string }) => {
         <div className="flex items-center justify-between gap-8">
           {/* Input */}
           <Input
+            size="sm"
+            isClearable
             placeholder="Write your comment"
             onChange={(e) => setDesc(e.target.value)}
           />
           {/* Button */}
-          <Button onClick={handleSubmit}>Send</Button>
+          <Button color="primary" variant="ghost" onClick={handleSubmit}>
+            Send
+          </Button>
         </div>
       ) : (
         <Link href="/">Sign in to comment</Link>
@@ -79,10 +83,9 @@ const Comments = ({ postSlug }: { postSlug: string }) => {
                 <div className="flex items-center gap-5 mb-5">
                   {/* UserImageContainer */}
                   {item?.user?.image && (
-                    <Avatar>
-                      <AvatarImage src={item.user.image} />
-                      <AvatarFallback>CN</AvatarFallback>
-                    </Avatar>
+                    <div className="flex gap-4 items-center">
+                      <Avatar src={item.user.image} size="md" />
+                    </div>
                   )}
                   {/* UserTextContainer */}
                   <div className="flex flex-col gap-1 text-softTextColor">
@@ -91,7 +94,7 @@ const Comments = ({ postSlug }: { postSlug: string }) => {
                       {item.user.name}
                     </span>
                     {/* Date */}
-                    <span>{item.createdAt}</span>
+                    <span>{item.createdAt.slice(0, 10)}</span>
                   </div>
                 </div>
                 {/* Description */}

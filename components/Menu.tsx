@@ -17,6 +17,29 @@ type Item = {
   };
 };
 
+type Comment = {
+  _id: string;
+  createdAt: string;
+  desc: string;
+  userEmail: string;
+  user: {
+    _id: string;
+    name: string;
+    email: string;
+    image: string;
+  };
+  post: {
+    _id: string;
+    createdAt: string;
+    slug: string;
+    title: string;
+    desc: string;
+    img: string;
+    views: number;
+    userEmail: string;
+  };
+};
+
 const getData = async (category: string) => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/posts?${category}=true`,
@@ -28,30 +51,39 @@ const getData = async (category: string) => {
   return res.json();
 };
 
+const getComments = async () => {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/comments?recent=true`,
+    {
+      cache: "no-store",
+    }
+  );
+  if (!res.ok) throw new Error("Failed");
+  return res.json();
+};
+
 const Menu = async () => {
   const popularPosts = await getData("popular");
-  const recommendedPosts = await getData("recommended");
+  const comments = await getComments();
 
   return (
     // Container
     <div className="w-1/4 mt-14 hidden lg:block">
-      {/* Subtitle */}
-      <h2 className="text-softTextColor text-base font-normal">
-        {"What's hot"}
-      </h2>
       {/* Title */}
-      <h1 className="text-3xl">Most Popular</h1>
+      <h1 className="text-xl xl:text-3xl border-b border-gray-600 dark:border-gray-400 w-max py-2">
+        TRENDING NOW
+      </h1>
       {popularPosts.posts?.map((item: Item) => (
-        <MenuPosts key={item._id} item={item} withImage={false} />
+        <MenuPosts key={item._id} item={item} />
       ))}
-      {/* Subtitle */}
-      <h2 className="text-softTextColor text-base font-normal">
-        Chosen by the editor
-      </h2>
+
       {/* Title */}
-      <h1 className="text-3xl">Editors Pick</h1>
-      {recommendedPosts.posts?.map((item: Item) => (
-        <MenuPosts key={item._id} item={item} withImage={true} />
+      <h1 className="text-xl xl:text-3xl border-b border-gray-600 dark:border-gray-400 w-max py-2">
+        RECENT COMMENTS
+      </h1>
+
+      {comments?.map((comment: Comment) => (
+        <MenuPosts key={comment._id} comment={comment} />
       ))}
     </div>
   );
